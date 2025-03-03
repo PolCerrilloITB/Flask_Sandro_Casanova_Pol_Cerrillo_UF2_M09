@@ -12,7 +12,7 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
+COPY torneig_escacs_flask_enunciat /app
 
 # Script d'inici
 COPY ./start.sh /start.sh
