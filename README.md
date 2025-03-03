@@ -20,7 +20,7 @@ docker run -dit -p 5000:5000 -p 2222:22 --name flask-container polcerrillo/flask
 
 -dit → Keeps the container running in the background.
 -p 5000:5000 → Exposes the Flask application on port 5000.
--p 2222:22 → Exposes the SSH server on port 2223.
+-p 2223:22 → Exposes the SSH server on port 2223.
 --name flask-container → Assigns a name to the container.
 
 ## 🌍 4️⃣ Access the Flask Application
