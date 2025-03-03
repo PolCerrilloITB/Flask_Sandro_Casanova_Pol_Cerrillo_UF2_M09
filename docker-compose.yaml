@@ -1,0 +1,51 @@
+version: '3.8'
+
+volumes:
+  dbdata:
+  document_root:
+
+networks:
+  dev:
+    driver: bridge
+
+services:
+  flask:
+    image: sp1/flask-app:latest
+    build: ./flask
+    ports:
+      - "5000:5000"
+      - "2223:22"
+    networks:
+      - dev
+    volumes:
+      - document_root:/app
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: sp
+      POSTGRES_PASSWORD: "itb2023"
+      POSTGRES_DB: mydatabase
+    networks:
+      - dev
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  developer:
+    image: sp2/developer-env:latest
+    build: ./developer
+    ports:
+      - "5900:5900"
+      - "2224:22"
+    networks:
+      - dev
+    volumes:
+      - document_root:/home/developer/workspace
+    depends_on:
+      - flask
+      - postgres
